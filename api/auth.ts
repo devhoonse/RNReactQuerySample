@@ -19,10 +19,10 @@ export async function register(params: RegisterParams) {
   return response.data;
 }
 export async function login(params: LoginParams) {
-  const response = await client.post<User>('/auth/local', params);
+  const response = await client.post<AuthResult>('/auth/local', params);
   return response.data;
 }
 export async function getLoginStatus() {
-  const response = await client.get<User>('/users/me');
+  const response = await client.get<AuthResult>('/users/me');
   return response.data;
 }

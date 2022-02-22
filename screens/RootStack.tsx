@@ -2,6 +2,7 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {RootStackParamList} from './types';
+import useAuthLoadEffect from '../hooks/useAuthLoadEffect';
 import MainTab from './MainTab';
 import ArticleScreen from './ArticleScreen';
 import RegisterScreen from './RegisterScreen';
@@ -11,6 +12,8 @@ import MyArticlesScreen from './MyArticlesScreen';
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootStack() {
+  useAuthLoadEffect();
+
   return (
     <Stack.Navigator screenOptions={{headerBackTitle: '닫기'}}>
       <Stack.Screen
