@@ -7,6 +7,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {RootStackParamList} from './types';
 import {getArticle} from '../api/articles';
 import {getComments} from '../api/comments';
+import {useUserState} from '../contexts/UserContext';
 import ArticleView from '../components/ArticleView';
 import CommentItem from '../components/CommentItem';
 
@@ -27,6 +28,7 @@ const styles = StyleSheet.create({
 });
 function ArticleScreen() {
   const {bottom} = useSafeAreaInsets();
+  const [currentUser] = useUserState();
   const {params} = useRoute<ArticleScreenRouteProp>();
   const {id} = params;
 
@@ -44,6 +46,7 @@ function ArticleScreen() {
   }
 
   const {title, body, published_at, user} = articleQuery.data;
+  const isMyArticle = currentUser?.id === user.id;
 
   return (
     <FlatList
@@ -65,6 +68,8 @@ function ArticleScreen() {
           body={body}
           publishedAt={published_at}
           username={user.username}
+          id={id}
+          isMyArticle={isMyArticle}
         />
       }
     />
